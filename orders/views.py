@@ -6,7 +6,7 @@ from users.models import Item,Dish
 
 
 
-@login_required(login_url='login_user')
+@login_required(login_url='login_view')
 def cart(requsets, id):
     list_item = Item.objects.filter(cart=Cart.objects.last())
     dish=Dish.objects.get(id=id)
@@ -30,7 +30,7 @@ def cart(requsets, id):
     return render(requsets,'cart.html',{'list_item':list_item})
 
 
-@login_required(login_url='login_user')
+@login_required(login_url='login_view')
 def order_history(request):
     orders=Order.objects.all()
 
@@ -44,7 +44,7 @@ def order_history(request):
     return render(request,'order_history.html',{"order_list": order_list})
 
 
-@login_required(login_url='login_user')
+@login_required(login_url='login_view')
 def delete(request,id):
     last_cart=Cart.objects.last()
     items=Item.objects.all()
@@ -54,7 +54,7 @@ def delete(request,id):
 
     return render(request,'cart.html',{"list_item": Item.objects.filter(cart=Cart.objects.last())})
 
-@login_required(login_url='login_user')
+@login_required(login_url='login_view')
 def order(request):
 
     if request.method=='POST':
@@ -69,7 +69,7 @@ def order(request):
         return redirect(pay)
     return render(request,'order.html')    
          
-@login_required(login_url='login_user')
+@login_required(login_url='login_view')
 def pay(request): 
     total=0
     my_order=Order.objects.last()
@@ -80,7 +80,7 @@ def pay(request):
     Cart(user=request.user).save()
     return render(request,'pay.html',{"total":total,'my_order':my_order})
 
-@login_required(login_url='login_manage')
+@login_required(login_url='admin_login')
 def delivery_manage(request):
     if request.method == 'POST':
         new_chack = request.POST.copy()
