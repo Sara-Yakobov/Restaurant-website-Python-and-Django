@@ -1,0 +1,34 @@
+{%extends 'menu_manager.html'%}
+{% block content%}
+
+
+<form action="{% url 'delivery_manage' %}" method="POST" style="direction: rtl;" >
+    <h1 style="display: flex; justify-content: center;">ניהול משלוחים</h1>
+    <input type="submit" value="עידכון נתונים">
+    <br/>
+{%csrf_token%}
+{%for item in list_order%}
+    <label style="color: white"> מספר הזמנה: </label>
+    {{ item.order.pk }}
+    <br/>
+    <label style="color: white"> מזמין: </label>
+    {{ item.order.order.user.first_name }}
+    <br/>
+    <label style="color: white"> תאריך ההזמנה: </label>
+    {{ item.order.created }}
+    <br/>
+    <label style="color: white"> תשלום: </label>
+    {{ item.payment }}
+    <br/>
+    {% if item.order.is_delivered %}
+
+    <input name="{{ item.order.pk }}" type="checkbox" checked/>
+    {% else %}
+    <input name="{{ item.order.pk }}" type="checkbox" />
+    {% endif %}
+    <label style="color: white"> נשלח בהצלחה? </label>
+    <br/>
+    <hr>
+{%endfor%}
+</form>
+{%endblock content%}

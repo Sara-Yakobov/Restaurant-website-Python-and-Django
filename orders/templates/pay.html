@@ -1,0 +1,16 @@
+{%extends 'layout.html'%}
+{%block content%}
+<div style="direction: rtl">
+<h1 style="display: flex; justify-content: center;padding-top: 15px;">תשלום הזמנה: </h1>
+<div style="display:  flex;justify-content: center;padding-top: 50px;">
+    <div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h5 class="card-title">משלוח מספר:{{my_order.order_id}}</h5>
+        <p class="card-text">סה"כ הזמנה לתשלום: ₪{{total}}</p>
+        <h6>תאריך ביצוע הזמנה: {{my_order.created}}</h6>
+        <a href="#" class="btn btn-primary"  style="display:  flex;justify-content: center;">שלם</a>
+    </div>
+    </div>
+</div>
+</div>
+{%endblock%}

@@ -1,0 +1,27 @@
+{%extends 'menu_manager.html'%}
+{%block content%}
+<form action="{%url 'category-admin'%}" style="direction: rtl;">
+    {%csrf_token%}
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    {% for category in categories %}
+      <div class="card" style="width: 18rem; margin: 20px;">
+          <img src="{{category.imageUrl}}" height="300px" class="card-img-top">
+          <div class="card-body">
+              <h5 class="card-title">{{category.name}}</h5>
+              <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                <a href="{%url 'dishes-admin' id=category.id%}" class="btn btn-secondary btn-lg" role="button">צפייה במנות</a>
+                <div>
+                  <a href="{% url 'edit_category' id=category.id %}"  class="btn btn-secondary btn-lg" role="button">עריכה</a>
+                  <a href="{% url 'delete_category' id=category.id %}" class="btn btn-secondary btn-lg" role="button">מחיקה</a>
+                </div>
+              </div>
+          </div>
+      </div>
+    {% endfor %}
+    </div>
+</form>
+{%endblock content%}
+
+
+
+

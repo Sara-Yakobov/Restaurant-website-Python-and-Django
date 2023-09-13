@@ -1,0 +1,20 @@
+{%extends 'layout.html'%}
+{% block content%}
+
+<form action="{%url 'order_history'%}" style="direction: rtl; border: 100%; background-color: white;" >
+    <h1 style="display: flex; justify-content: center;">היסטוריית הזמנות</h1>   
+{%csrf_token%}
+{%for item in order_list%}
+    <label> מספר הזמנה: </label>
+    {{ item.order.pk }}
+    <br/>
+    <label> תאריך ההזמנה: </label>
+    {{ item.order.created }}
+    <br/>
+    <label> תשלום: </label>
+    {{ item.payment }}
+    <br/>
+    <hr>
+{%endfor%}
+</form>
+{%endblock content%}

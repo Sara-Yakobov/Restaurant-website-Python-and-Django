@@ -1,0 +1,29 @@
+{%extends 'layout.html'%}
+{%block content%}
+<form action="{%url 'order'%}"  style="direction: rtl;" >
+    <h1 style="display: flex; flex-wrap: wrap;justify-content: center;"> העגלה שלי</h1>
+    <a href="{%url 'category_user'%}" class="btn btn-primary" >חזרה לתפריט</a>
+    
+    {%csrf_token%}
+    <div style="display: flex; flex-wrap: wrap;justify-content: center;padding: 5px;">
+        {%for item in list_item%}
+        <div class="card" style="width: 18rem;margin:10px;padding:20px;font-size: small; ">
+            <img src={{item.dish.imageUrl}} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.dish.name}}-₪{{item.dish.price}}</h5>
+              <h6>כמות :{{item.amount}}</h6>
+              <p class="card-text">{{item.dish.description}}</p>
+              <a href="{%url 'delete' id=item.dish.id%}" class="btn btn-primary" >הסרה מהעגלה</a>
+              
+            </div>
+        </div>
+            
+        {%endfor%}
+    </div>
+   
+
+    
+    <a href="{%url 'order'%}" style="display: flex;justify-content: center;"><button type="submit" class="btn btn-primary" >ביצוע הזמנה</button></a>
+   
+</form>
+{%endblock content%}

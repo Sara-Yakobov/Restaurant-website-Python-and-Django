@@ -1,0 +1,32 @@
+{% extends 'menu_manager.html' %}
+{% block content %}
+<form action="{% url 'dishes-admin' id=id %}" style="direction: rtl;">
+    {% csrf_token %}
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+      {% for dish in dishes %}
+      {%if dish.category.id == id%}
+        <div class="card" style="width: 18rem; margin: 20px;">
+          <img src="{{ dish.imageUrl }}" height="300px" class="card-img-top" >
+          <div class="card-body">
+            {% if dish.is_vegetarian == True  %}
+                <h5 class="card-title">{{ dish.name }} - {{ dish.price }}₪ (צמחוני)</h5>
+            {% else %}
+                <h5 class="card-title">{{ dish.name }} - {{ dish.price }}₪</h5>
+            {% endif %}
+            {% if dish.is_gluten_free == True %}
+            <p style="font-family: 'Times New Roman', Times, serif; font-size: medium;">המנה מכילה גלוטן</p>
+            {% else %}
+                <p style="font-family: 'Times New Roman', Times, serif; font-size: medium;">המנה ללא גלוטן</p>
+            {% endif %}
+        
+        
+            <p class="card-text">{{ dish.description }}</p>
+            <a href="{% url 'edit_dish' id=dish.id %}" class="btn btn-secondary btn-lg" role="button">עריכה</a>
+            <a href="{% url 'delete_dish' id=dish.id %}" class="btn btn-danger btn-sm" role="button">מחיקה</a>
+          </div>
+        </div>
+      {%endif%}
+      {% endfor %}
+    </div>
+  </form>
+{% endblock content %}

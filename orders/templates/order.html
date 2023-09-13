@@ -1,0 +1,29 @@
+{%extends 'layout.html'%}
+{% block content%}
+<style>
+    input[type=text] ,button,textarea{
+    width: 50%;
+    padding: 10px 10px;
+    margin-right: 350px;
+    margin-bottom: 8px;
+    
+    box-sizing: border-box;
+}
+</style>
+<form action="{% url 'order' %}" method="POST" style="direction: rtl;" >
+    <h1 style="display: flex; justify-content: center;">פרטי משלוח</h1>   
+{%csrf_token%}
+<div >
+    <div style="margin-top: 100px;">
+        <input type="text"  placeholder="כתובת משלוח" name='adress'>
+    </div>
+
+    <div>
+        <textarea name="comment"  cols="30" rows="10" placeholder="הערות למשלוח..."></textarea>
+    </div>
+    <div>
+        <button type="submit">הוספה</button>    
+    </div>
+</div>
+</form>     
+{%endblock content%}

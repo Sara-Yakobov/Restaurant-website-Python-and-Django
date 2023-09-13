@@ -1,0 +1,44 @@
+{%extends 'menu_manager.html'%}
+{%block content%}
+
+    <div class="container">
+      <h2 style="color: white; font-weight: bold;" >הוספת מנה</h2>
+      <form action="{% url 'add-dish' %}" method="POST" style="direction: rtl;">
+        {%csrf_token%}
+        <div class="form-group">
+          <label for="name" style="color: white; font-weight: bold;">שם המנה:</label>
+          <input type="text" class="form-control" id="name" name="name" value="{{ form.name.value }}" required>
+        </div>
+        <div class="form-group">
+         <label for="price" style="color: white; font-weight: bold;">מחיר:</label>
+         <div class="input-group">
+             <input type="text" class="form-control" id="price" name="price" value="{{ form.price.value }}" required>
+         </div>
+     </div>     
+        <div class="form-group">
+          <label for="description" style="color: white; font-weight: bold;">תיאור המנה:</label>
+          <input type="text" class="form-control" id="description" name="description" value="{{ form.description.value }}" required>
+        </div>
+        <div class="form-group">
+         <label for="imageUrl" style="color: white; font-weight: bold;">קישור לתמונה:</label>
+         <input type="text" class="form-control" id="imageUrl" name="imageUrl" value="{{ form.imageUrl.value }}" required>
+       </div>
+       <div>
+         <select name="categories" >
+             {% for category in categories %}
+             <option value="{{category.id}}">{{category.name}}</option>
+             {%endfor%}
+         </select>
+      </div>
+        <div>
+         <input type="checkbox" name="is_gluten_free" > ?מכיל גלוטן
+      </div>
+      <div>
+         <input type="checkbox" name="is_vegetarian" > ?צמחוני
+      </div>
+        <button type="submit" class="btn btn-primary" style="color: white; font-weight: bold;">+</button>
+    </div>
+      </form>
+    
+    
+{%endblock content%}

@@ -1,0 +1,21 @@
+{%extends 'menu_manager.html'%}
+{%block content%}
+
+
+<div class="container">
+    <h2 style="color: white; font-weight: bold;" >קטגוריה חדשה</h2>
+    <form action="{% url 'add_category' %}" method="POST">
+      {% csrf_token %} 
+      <div class="form-group">
+        <label for="category_name" style="color: white; font-weight: bold;">שם הקטגוריה:</label>
+        <input type="text" class="form-control" id="category_name" name="category_name" value="{{ form.category_name.value }}" required>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl" style="color: white; font-weight: bold;">קישור לתמונה:</label>
+        <input type="text" class="form-control" id="imageUrl" name="imageUrl" value="{{ form.imageUrl.value }}" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="color: white; font-weight: bold;">+</button>
+    </form>
+  </div>
+
+{%endblock content%}

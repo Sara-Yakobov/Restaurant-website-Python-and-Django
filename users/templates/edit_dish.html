@@ -1,0 +1,51 @@
+{%extends 'menu_manager.html'%}
+{%block content%}
+
+    <div class="container">
+      <h2 style="color: white; font-weight: bold;" >עריכת מנה</h2>
+      <form action="{% url 'edit_dish' id=dish_id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name" style="color: white; font-weight: bold;">שם המנה:</label>
+          <input type="text" class="form-control" id="name" name="name" value="{{ dish.name.value }}" required>
+        </div>
+        <div class="form-group">
+         <label for="price" style="color: white; font-weight: bold;">מחיר:</label>
+         <div class="input-group">
+             <input type="text" class="form-control" id="price" name="price" value="{{ dish.price.value }}" required>
+         </div>
+     </div>     
+        <div class="form-group">
+          <label for="description" style="color: white; font-weight: bold;">תיאור המוצר:</label>
+          <input type="text" class="form-control" id="description" name="description" value="{{ dish.description.value }}" ₪ required>
+        </div>
+        <div class="form-group">
+         <label for="imageUrl" style="color: white; font-weight: bold;">קישור לתמונה:</label>
+         <input type="text" class="form-control" id="imageUrl" name="imageUrl" value="{{ dish.imageUrl.value }}" required>
+       </div>
+        <div>
+            {% if dish.is_gluten_free.value %}
+         <input type="checkbox" name="is_gluten_free" checked > ?מכיל גלוטן
+            {% else %}
+            <input type="checkbox" name="is_gluten_free" > ?מכיל גלוטן
+            {% endif %}
+      </div>
+      <div>
+          {% if dish.is_vegetarian.value %}
+         <input type="checkbox" name="is_vegetarian" checked> ?צמחוני
+          {% else %}
+            <input type="checkbox" name="is_vegetarian" > ?מכיל גלוטן
+            {% endif %}
+      </div>
+       <div>
+         <select name="categories" >
+             {% for category in categories %}
+             <option value="{{category.id}}">{{category.name}}</option>
+             {%endfor%}
+         </select>
+      </div>
+        <button type="submit" class="btn btn-primary" style="color: white; font-weight: bold;">עדכון עריכת מנה</button>
+      </form>
+    </div>
+    
+{%endblock content%}
